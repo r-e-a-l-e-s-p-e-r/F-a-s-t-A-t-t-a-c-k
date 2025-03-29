@@ -6862,10 +6862,10 @@ spawn(function()
     while true do
         if Xz12 then
             yZn34 = true
-            wait(0.00001)
+            task.wait(0.00001)
         else
             yZn34 = false
-            wait(0.00001)
+            task.wait(0.00001)
         end
         if Xz12 then
             local cLst = zXy9(game.Players.LocalPlayer)
@@ -6880,8 +6880,7 @@ spawn(function()
 end)
 Xz12 = true
 spawn(function()
-    while true do
-        task.wait(0.00001)
+    game:GetService("RunService").RenderStepped:Connect(function()
         pcall(function()
             if _G['Fast Attack'] then
                 for i, v in next, workspace.Enemies:GetChildren() do
@@ -6911,8 +6910,7 @@ spawn(function()
         end)
     end
 end)
-
-while true do task.wait(0.00001)
+game:GetService("RunService").RenderStepped:Connect(function()
 for i, v in next, workspace.Enemies:GetChildren() do
         if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
             game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0.00001)
@@ -6933,6 +6931,58 @@ for i, v in next, workspace.Enemies:GetChildren() do
     end
 end
 
+Xz12 = true
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G['Fast Attack'] then
+                for i, v in next, workspace.Enemies:GetChildren() do
+                    if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and 
+                    (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0)
+                        
+                        local args = {
+                            [1] = v:FindFirstChild("RightHand"),
+                            [2] = {}
+                        }
+                        
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+                    end
+                end
+            end
+        end)
+    end
+end)
+while task.wait() do
+for i, v in next, workspace.Enemies:GetChildren() do
+        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0)
+            local args = {
+                [1] = v:FindFirstChild("RightHand"),
+                [2] = {}
+            }
+            for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                    table.insert(args[2], {
+                        [1] = e,
+                        [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                    })
+                end
+            end
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+        end
+    end
+end
 
 task.spawn(function()
     while true do
