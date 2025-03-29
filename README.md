@@ -6760,6 +6760,394 @@ spawn(function()
     end
 end)
 
+local RS = game:GetService("ReplicatedStorage")
+local regAtk = RS.Modules.Net:FindFirstChild("RE/RegisterAttack")
+local regHit = RS.Modules.Net:FindFirstChild("RE/RegisterHit")
+
+local function zXy9(player)
+    local lst = {}
+    for _, obj in pairs(workspace.Characters:GetChildren()) do
+        if obj ~= player.Character and obj:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj.HumanoidRootPart.Position) < 200 then
+            table.insert(lst, {obj, obj.HumanoidRootPart})
+        end
+    end
+
+    for _, obj2 in pairs(workspace.Enemies:GetChildren()) do
+        if obj2:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj2.HumanoidRootPart.Position) < 200 then
+            table.insert(lst, {obj2, obj2.HumanoidRootPart})
+        end
+    end
+
+    return lst
+end
+
+local yZn34 = false
+spawn(function()
+    while true do
+        if Xz12 then
+            yZn34 = true
+            wait(.0)
+        else
+            yZn34 = false
+            wait(.0)
+        end
+        if Xz12 then
+            local cLst = zXy9(game.Players.LocalPlayer)
+            if #cLst > 0 then
+                regAtk:FireServer(.0)
+                for _, tgt in next, cLst do
+                    regHit:FireServer(cLst[_][2], cLst)
+                end
+            end
+        end
+    end
+end)
+Xz12 = true
+spawn(function()
+    while true do
+        task.wait(0)
+        pcall(function()
+            if _G['Fast Attack'] then
+                for i, v in next, workspace.Enemies:GetChildren() do
+                    if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and 
+                    (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0)
+                        
+                        local args = {
+                            [1] = v:FindFirstChild("RightHand"),
+                            [2] = {}
+                        }
+                        
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+while true do task.wait()
+for i, v in next, workspace.Enemies:GetChildren() do
+        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0)
+            local args = {
+                [1] = v:FindFirstChild("RightHand"),
+                [2] = {}
+            }
+            for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                    table.insert(args[2], {
+                        [1] = e,
+                        [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                    })
+                end
+            end
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+        end
+    end
+end
+
+local RS = game:GetService("ReplicatedStorage")
+local regAtk = RS.Modules.Net:FindFirstChild("RE/RegisterAttack")
+local regHit = RS.Modules.Net:FindFirstChild("RE/RegisterHit")
+
+local function zXy9(player)
+    local lst = {}
+    for _, obj in pairs(workspace.Characters:GetChildren()) do
+        if obj ~= player.Character and obj:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj.HumanoidRootPart.Position) < 200 then
+            table.insert(lst, {obj, obj.HumanoidRootPart})
+        end
+    end
+
+    for _, obj2 in pairs(workspace.Enemies:GetChildren()) do
+        if obj2:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj2.HumanoidRootPart.Position) < 200 then
+            table.insert(lst, {obj2, obj2.HumanoidRootPart})
+        end
+    end
+
+    return lst
+end
+
+local yZn34 = false
+spawn(function()
+    while true do
+        if Xz12 then
+            yZn34 = true
+            task.wait(.1)
+        else
+            yZn34 = false
+            task.wait(.1)
+        end
+        if Xz12 then
+            local cLst = zXy9(game.Players.LocalPlayer)
+            if #cLst > 0 then
+                regAtk:FireServer(.0)
+                for _, tgt in next, cLst do
+                    regHit:FireServer(cLst[_][2], cLst)
+                end
+            end
+        end
+    end
+end)
+Xz12 = true
+spawn(function()
+    while true do
+        task.wait(.1)
+        pcall(function()
+            if _G['Fast Attack'] then
+                for i, v in next, workspace.Enemies:GetChildren() do
+                    if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and 
+                    (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(.1)
+                        
+                        local args = {
+                            [1] = v:FindFirstChild("RightHand"),
+                            [2] = {}
+                        }
+                        
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+while true do task.wait(.1)
+for i, v in next, workspace.Enemies:GetChildren() do
+        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(.1)
+            local args = {
+                [1] = v:FindFirstChild("RightHand"),
+                [2] = {}
+            }
+            for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                    table.insert(args[2], {
+                        [1] = e,
+                        [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                    })
+                end
+            end
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+        end
+    end
+end
+
+local RS = game:GetService("ReplicatedStorage")
+local regAtk = RS.Modules.Net:FindFirstChild("RE/RegisterAttack")
+local regHit = RS.Modules.Net:FindFirstChild("RE/RegisterHit")
+
+local function zXy9(player)
+    local lst = {}
+    for _, obj in pairs(workspace.Characters:GetChildren()) do
+        if obj ~= player.Character and obj:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj.HumanoidRootPart.Position) < 200 then
+            table.insert(lst, {obj, obj.HumanoidRootPart})
+        end
+    end
+
+    for _, obj2 in pairs(workspace.Enemies:GetChildren()) do
+        if obj2:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj2.HumanoidRootPart.Position) < 200 then
+            table.insert(lst, {obj2, obj2.HumanoidRootPart})
+        end
+    end
+
+    return lst
+end
+
+local yZn34 = false
+spawn(function()
+    while true do
+        if Xz12 then
+            yZn34 = true
+            task.wait(0.000000001)
+        else
+            yZn34 = false
+            task.wait(0.000000001)
+        end
+        if Xz12 then
+            local cLst = zXy9(game.Players.LocalPlayer)
+            if #cLst > 0 then
+                regAtk:FireServer(0.000000001)
+                for _, tgt in next, cLst do
+                    regHit:FireServer(cLst[_][2], cLst)
+                end
+            end
+        end
+    end
+end)
+Xz12 = true
+spawn(function()
+    while true do
+        task.wait(0.000000001)
+        pcall(function()
+            if _G['Fast Attack'] then
+                for i, v in next, workspace.Enemies:GetChildren() do
+                    if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and 
+                    (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0.000000001)
+                        
+                        local args = {
+                            [1] = v:FindFirstChild("RightHand"),
+                            [2] = {}
+                        }
+                        
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+while true do task.wait(0.000000001)
+for i, v in next, workspace.Enemies:GetChildren() do
+        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0.000000001)
+            local args = {
+                [1] = v:FindFirstChild("RightHand"),
+                [2] = {}
+            }
+            for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                    table.insert(args[2], {
+                        [1] = e,
+                        [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                    })
+                end
+            end
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+        end
+    end
+end
+
+local RS = game:GetService("ReplicatedStorage")
+local regAtk = RS.Modules.Net:FindFirstChild("RE/RegisterAttack")
+local regHit = RS.Modules.Net:FindFirstChild("RE/RegisterHit")
+
+local function zXy9(player)
+    local lst = {}
+    for _, obj in pairs(workspace.Characters:GetChildren()) do
+        if obj ~= player.Character and obj:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj.HumanoidRootPart.Position) < 200 then
+            table.insert(lst, {obj, obj.HumanoidRootPart})
+        end
+    end
+
+    for _, obj2 in pairs(workspace.Enemies:GetChildren()) do
+        if obj2:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj2.HumanoidRootPart.Position) < 200 then
+            table.insert(lst, {obj2, obj2.HumanoidRootPart})
+        end
+    end
+
+    return lst
+end
+
+local yZn34 = false
+spawn(function()
+    while true do
+        if Xz12 then
+            yZn34 = true
+            task.wait(0.000000003)
+        else
+            yZn34 = false
+            task.wait(0.000000003)
+        end
+        if Xz12 then
+            local cLst = zXy9(game.Players.LocalPlayer)
+            if #cLst > 0 then
+                regAtk:FireServer(0.000000003)
+                for _, tgt in next, cLst do
+                    regHit:FireServer(cLst[_][2], cLst)
+                end
+            end
+        end
+    end
+end)
+Xz12 = true
+spawn(function()
+    while true do
+        task.wait(0.000000003)
+        pcall(function()
+            if _G['Fast Attack'] then
+                for i, v in next, workspace.Enemies:GetChildren() do
+                    if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and 
+                    (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0.000000003)
+                        
+                        local args = {
+                            [1] = v:FindFirstChild("RightHand"),
+                            [2] = {}
+                        }
+                        
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        
+                        game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+while true do task.wait(0.000000003)
+for i, v in next, workspace.Enemies:GetChildren() do
+        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterAttack"):FireServer(0.000000003)
+            local args = {
+                [1] = v:FindFirstChild("RightHand"),
+                [2] = {}
+            }
+            for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                    table.insert(args[2], {
+                        [1] = e,
+                        [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                    })
+                end
+            end
+            game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+        end
+    end
+end
+
 task.spawn(function()
     while true do
         if _G['Fast Attack'] then
@@ -6863,6 +7251,204 @@ spawn(function()
              pcall(function()
                 game:GetService'VirtualUser':CaptureController()
 			    game:GetService'VirtualUser':Button1Down(Vector2.new(0,1,0,1))
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end)
+end)
+
+spawn(function()
+    while true do task.wait()
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(0.1)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(0.01)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(0.001)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(.2)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+            	game:GetService("VirtualUser"):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end)
+end)
+
+spawn(function()
+    while true do task.wait()
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(0.1)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(0.01)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(0.001)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(.2)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+             pcall(function()
+                game:GetService("VirtualUser"):CaptureController()
+	            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
             end)
         end
     end
