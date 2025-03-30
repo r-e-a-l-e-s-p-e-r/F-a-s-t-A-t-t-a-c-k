@@ -7306,27 +7306,6 @@ local RegisterAttack = replicatedstorage:WaitForChild("Modules"):WaitForChild("N
 local RegisterHit = replicatedstorage:WaitForChild("Modules"):WaitForChild("Net"):WaitForChild("RE/RegisterHit")
 
 spawn(function()
-    while true do
-        if _G['Fast Attack'] then
-            _G['Fast Attack'] = true
-            wait(.0)
-        else
-            _G['Fast Attack'] = false
-            wait(.0)
-        end
-        if _G['Fast Attack'] then
-            local targets = GetNearbyTargets(game.Players.LocalPlayer, 200)
-            if #targets > 0 then
-                RegisterAttack:FireServer(.0)
-                for _, target in next, targets do
-                    RegisterHit:FireServer(target[2], targets)
-                end
-            end
-        end
-    end
-end)
-
-spawn(function()
     while true do task.wait(0)
         pcall(function()
             if _G['Fast Attack'] then
