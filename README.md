@@ -90,6 +90,85 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = true
     end
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+
+spawn(function()
+	while wait(.1) do
+		pcall(function()
+			if _G['Fast Attack'] == true then
+				repeat task.wait(0.1)
+					wait()
+					module:BladeHits()
+					game:GetService("RunService").RenderStepped:Wait() 
+				until not _G['Fast Attack']
+			end
+		end)
+	end
+	end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						module:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						module:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
 
     task.spawn(function()
         while true do
@@ -267,6 +346,85 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                AttackModule:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                AttackModule:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                AttackModule:BladeHits()
+            end)
+        end
+    end
+end)
+
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    AttackModule:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    
+    spawn(function()
+	while wait(.1) do
+		pcall(function()
+			if _G['Fast Attack'] == true then
+				repeat task.wait(0.1)
+					wait()
+					AttackModule:BladeHits()
+					game:GetService("RunService").RenderStepped:Wait() 
+				until not _G['Fast Attack']
+			end
+		end)
+	end
+	end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						AttackModule:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						AttackModule:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
 
     task.spawn(function()
         while task.wait(0.000000007) do
@@ -445,6 +603,85 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                AttackModule:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                AttackModule:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                AttackModule:BladeHits()
+            end)
+        end
+    end
+end)
+
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    AttackModule:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    
+    spawn(function()
+	while wait(.1) do
+		pcall(function()
+			if _G['Fast Attack'] == true then
+				repeat task.wait(0.1)
+					wait()
+					AttackModule:BladeHits()
+					game:GetService("RunService").RenderStepped:Wait() 
+				until not _G['Fast Attack']
+			end
+		end)
+	end
+	end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						AttackModule:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						AttackModule:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
 
     task.spawn(function()
         while task.wait(0.01) do
@@ -610,6 +847,85 @@ Module.FastAttack = (function()
     function module:BladeHits()
         self:AttackNearest()
     end
+    spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    
+    spawn(function()
+	while wait(.1) do
+		pcall(function()
+			if _G['Fast Attack'] == true then
+				repeat task.wait(0.1)
+					wait()
+					module:BladeHits()
+					game:GetService("RunService").RenderStepped:Wait() 
+				until not _G['Fast Attack']
+			end
+		end)
+	end
+	end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						module:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						module:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
     
     task.spawn(function()
         local RunService = game:GetService("RunService")
@@ -841,6 +1157,84 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+	while wait(.1) do
+		pcall(function()
+			if _G['Fast Attack'] == true then
+				repeat task.wait(0.1)
+					wait()
+					module:BladeHits()
+					game:GetService("RunService").RenderStepped:Wait() 
+				until not _G['Fast Attack']
+			end
+		end)
+	end
+	end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						module:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						module:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -1154,7 +1548,45 @@ function Module.AttackNoCD()
         end
     end)
 end
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
 
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCD()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 function Module.AttackPlayer(targetName)
     pcall(function()
         if not Module.IsAlive(client.Character) then return end
@@ -1251,7 +1683,84 @@ Module.FastAttack = (function()
     environment._trash_attack = module
     return module
 end)()
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
 
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCD()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+	while wait(.1) do
+		pcall(function()
+			if _G['Fast Attack'] == true then
+				repeat task.wait(0.1)
+					wait()
+					Module.AttackNoCD()
+					game:GetService("RunService").RenderStepped:Wait() 
+				until not _G['Fast Attack']
+			end
+		end)
+	end
+	end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						Module.AttackNoCD()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						Module.AttackNoCD()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -1265,7 +1774,84 @@ spawn(function()
         end)
     end
 end)
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.FastAttack:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.FastAttack:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.FastAttack:BladeHits()
+            end)
+        end
+    end
+end)
 
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.FastAttack:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+	while wait(.1) do
+		pcall(function()
+			if _G['Fast Attack'] == true then
+				repeat task.wait(0.1)
+					wait()
+					Module.FastAttack:BladeHits()
+					game:GetService("RunService").RenderStepped:Wait() 
+				until not _G['Fast Attack']
+			end
+		end)
+	end
+	end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						Module.FastAttack:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						Module.FastAttack:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
 task.spawn(function()
     while game:GetService("RunService").Stepped:Wait() do
         if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -1414,6 +2000,84 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+	while wait(.1) do
+		pcall(function()
+			if _G['Fast Attack'] == true then
+				repeat task.wait(0.1)
+					wait()
+					module:BladeHits()
+					game:GetService("RunService").RenderStepped:Wait() 
+				until not _G['Fast Attack']
+			end
+		end)
+	end
+	end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						module:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
+
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G['Fast Attack'] == true then
+					repeat task.wait(0.2)
+						module:BladeHits()
+						game:GetService("RunService").RenderStepped:Wait()
+					until not _G['Fast Attack']
+				end
+			end)
+		end
+		end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -1652,6 +2316,56 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00001)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -1927,6 +2641,45 @@ function Module.AttackPlayer(targetName)
         end
     end)
 end
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.AttackNoCD()
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCD()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 
 Module.FastAttack = (function()
     if environment._trash_attack then
@@ -1986,7 +2739,56 @@ Module.FastAttack = (function()
     environment._trash_attack = module
     return module
 end)()
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
 
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.000002)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -2000,7 +2802,45 @@ spawn(function()
         end)
     end
 end)
+spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.FastAttack:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.FastAttack:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                Module.FastAttack:BladeHits()
+            end)
+        end
+    end
+end)
 
+spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00001)
+                    Module.FastAttack:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 task.spawn(function()
     while game:GetService("RunService").Stepped:Wait() do
         if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -2305,7 +3145,67 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+ spawn(function()
+    while true do task.wait(.3)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.1)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
+spawn(function()
+    while true do task.wait(.0)
+        if _G['Fast Attack'] then
+            pcall(function()
+                module:BladeHits()
+            end)
+        end
+    end
+end)
 
+ spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.0000003)
+                    module:AttackFunction()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:AttackFunction()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if _G['Fast Attack'] then
@@ -2318,7 +3218,28 @@ Module.FastAttack = (function()
             end
         end
     end)
-
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:DamageAura()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00001)
+                    module:DamageAura()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while task.wait(.3) do
             if _G['Fast Attack'] then
@@ -2326,7 +3247,17 @@ Module.FastAttack = (function()
             end
         end
     end)
-
+spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.0000007)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while task.wait(.3) do
             pcall(function()
@@ -2470,7 +3401,28 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
-    
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if not Settings.FastAttackEnabled then continue end
@@ -2727,6 +3679,28 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.000000001)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
@@ -2950,7 +3924,50 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
-    
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.0000000007)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00000001)
+                    Module.AttackNoCoolDown()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCoolDown()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if not Settings.FastAttackEnabled then continue end
@@ -3201,7 +4218,50 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
-    
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00001)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCoolDown()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.0000000007)
+                    Module.AttackNoCoolDown()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if not Settings.FastAttackEnabled then continue end
@@ -3449,7 +4509,28 @@ Module.FastAttack = (function()
             RegisterHit:FireServer(unpack(args))
         end
     end
-    
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:AttackFunction()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -3523,7 +4604,28 @@ spawn(function()
         end)
     end
 end)
-
+spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00001)
+                    Module.FastAttack:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.FastAttack:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -3707,6 +4809,28 @@ Module.FastAttack = (function()
             module:BladeHits()
         end
     end)
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.000000003)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     
     task.spawn(function()
         while task.wait(0) do
@@ -3917,6 +5041,18 @@ Module.FastAttack = (function()
         self.FirstAttack = false
     end
 
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -3926,6 +5062,18 @@ Module.FastAttack = (function()
             module:BladeHits()
         end
     end)
+    
+    spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.000007)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     
     task.spawn(function()
         while task.wait(0.0001) do
@@ -4135,6 +5283,28 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.000000007)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
@@ -4324,6 +5494,28 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.0000002)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -4638,6 +5830,18 @@ function Module.AttackNoCD()
     end)
 end
 
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCD()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+
 function Module.AttackPlayer(targetName)
     pcall(function()
         if not Module.IsAlive(client.Character) then return end
@@ -4748,7 +5952,39 @@ spawn(function()
         end)
     end
 end)
-
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCD()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00001)
+                    Module.FastAttack:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.FastAttack:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 task.spawn(function()
     while game:GetService("RunService").Stepped:Wait() do
         if (tick() - Module.AttackCooldown) < 0.000000001 then continue end
@@ -4901,7 +6137,17 @@ Module.FastAttack = (function()
             self.FirstAttack = false
         end
     end
-
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:AttackFunction()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     function module:AttackNearest()
         local args = {
             [1] = nil,
@@ -4948,7 +6194,61 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
-
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00000001)
+                    module:AttackFunction()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:AttackFunction()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.0001)
+                    module:DamageAura()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:DamageAura()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if _G['Fast Attack'] then
@@ -4969,7 +6269,17 @@ Module.FastAttack = (function()
             end
         end
     end)
-
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while task.wait(.3) do
             pcall(function()
@@ -5113,6 +6423,28 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(.1) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(0.00000007)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
@@ -5297,7 +6629,17 @@ local function Attack()
         RegisterHit:FireServer(unpack(args))
     end
 end
-
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Attack()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 local Module = {}
 Module.AttackCooldown = tick()
 
@@ -5370,6 +6712,24 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(0.0000003) do
+        if _G['Fast Attack'] then
+            module:BladeHits()
+        end
+    end
+end)
     
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
@@ -5593,7 +6953,43 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
-    
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(0.0000007) do
+        if _G['Fast Attack'] then
+            module:BladeHits()
+        end
+    end
+end)
+
+spawn(function()
+    while wait(0.0000007) do
+        if _G['Fast Attack'] then
+            Module.AttackNoCoolDown()
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCoolDown()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if not Settings.FastAttackEnabled then continue end
@@ -5845,6 +7241,42 @@ Module.FastAttack = (function()
         self.FirstAttack = false
     end
     
+    spawn(function()
+    while wait(0.0000007) do
+        if _G['Fast Attack'] then
+            Module.AttackNoCoolDown()
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.AttackNoCoolDown()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(0.0000001) do
+        if _G['Fast Attack'] then
+            module:BladeHits()
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if not Settings.FastAttackEnabled then continue end
@@ -6046,6 +7478,24 @@ Module.FastAttack = (function()
         self.FirstAttack = false
     end
     
+    spawn(function()
+    while wait(0.0000007) do
+        if _G['Fast Attack'] then
+            module:BladeHits()
+        end
+    end
+end)
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     function module:getAllBladeHits(Sizes)
         local Hits = {}
         local Enemies = enemyfolder:GetChildren()
@@ -6092,7 +7542,17 @@ Module.FastAttack = (function()
             RegisterHit:FireServer(unpack(args))
         end
     end
-    
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:AttackFunction()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
             if (tick() - Module.AttackCooldown) < 0 then continue end
@@ -6105,7 +7565,17 @@ Module.FastAttack = (function()
     environment._trash_attack = module
     return module
 end)()
-
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 local function findNearbyTargets(player)
     local targetList = {}
     for _, obj in pairs(workspace.Characters:GetChildren()) do
@@ -6166,7 +7636,24 @@ spawn(function()
         end)
     end
 end)
-
+spawn(function()
+    while task.wait(0.0000009) do
+        if _G['Fast Attack'] then
+            Module.FastAttack:BladeHits()
+        end
+    end
+end)
+spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    Module.FastAttack:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -6340,6 +7827,24 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(0.0000007) do
+        if _G['Fast Attack'] then
+            module:BladeHits()
+        end
+    end
+end)
 
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
@@ -6499,6 +8004,24 @@ CombatModule.FastAttack = (function()
 		self:AttackNearbyEntities()
 		self.InitialAttack = false
 	end
+	spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    FastAttackModule:ExecuteBladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+	spawn(function()
+    while wait(0.0000009) do
+        if _G['Fast Attack'] then
+            FastAttackModule:ExecuteBladeHits()
+        end
+    end
+end)
 
 	task.spawn(function()
 		while game:GetService("RunService").Stepped:Wait() do
@@ -6708,12 +8231,48 @@ Module.FastAttack = (function()
         self:AttackNearest()
         self.FirstAttack = false
     end
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:BladeHits()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(0.00007) do
+        if _G['Fast Attack'] then
+            module:BladeHits()
+        end
+    end
+end)
 
     function module:Boost()
         if client.Character and client.Character:FindFirstChildOfClass("Tool") then
             task.wait(.0)
         end
     end
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:Boost()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
+    spawn(function()
+    while wait(0.00001) do
+        if _G['Fast Attack'] then
+            module:Boost()
+        end
+    end
+end)
 
     task.spawn(function()
         while game:GetService("RunService").Stepped:Wait() do
@@ -6774,7 +8333,17 @@ Module.FastAttack = (function()
             end
         end
     end
-    
+    spawn(function()
+    while task.wait(.0) do
+        if _G['Fast Attack'] then
+            pcall(function()
+                repeat task.wait(.0)
+                    module:SpecialAttack()
+                until not _G['Fast Attack']
+            end)
+        end
+    end
+end)
     task.spawn(function()
         while task.wait(0.25) do
             if Module.IsAlive(client.Character) and client.Character:FindFirstChildOfClass("Tool") then
@@ -6879,235 +8448,184 @@ task.spawn(function()
     end
 end)
 
-local RS = game:GetService("ReplicatedStorage")
-local regAtk = RS.Modules.Net:WaitForChild("RE/RegisterAttack")
-local regHit = RS.Modules.Net:WaitForChild("RE/RegisterHit")
-
-local Module = {}
-Module.AttackCooldown = .0
+local Module = {
+    AttackCooldown = tick()
+}
 local CachedChars = {}
 
 function Module.IsAlive(Char: Model?): boolean
-	if not Char then
-		return nil
-	end
-	if CachedChars[Char] then
-		return CachedChars[Char].Health > 0
-	end
-	local Hum = Char:FindFirstChildOfClass("Humanoid")
-	CachedChars[Char] = Hum
-	return Hum and Hum.Health > 0
+    if not Char then return nil end
+    local Hum = CachedChars[Char] or Char:FindFirstChildOfClass("Humanoid")
+    if Hum then
+        CachedChars[Char] = Hum
+        return Hum.Health > 0
+    end
+    return false
 end
 
 local Settings = {
-    ClickDelay = .0,
+    ClickDelay = 0.01,
     AutoClick = true,
-    HitboxSize = 60
 }
 
-function Module.GetCurrentWeapon()
-    local tool = client.Character:FindFirstChildOfClass("Tool")
-    if tool then
-        return tool.Name
-    end
-    return nil
-end
-
-function Module.GetAllHits(Size)
+function getHits(Size)
     local Hits = {}
-    local Enemies = enemyfolder:GetChildren()
-    for i = 1, #Enemies do
-        local v = Enemies[i]
+    local Enemies = workspace.Enemies:GetChildren()
+    local Characters = workspace.Characters:GetChildren()
+    for i=1,#Enemies do local v = Enemies[i]
         local Human = v:FindFirstChildOfClass("Humanoid")
-        if Human and Human.RootPart and Human.Health > 0 and client:DistanceFromCharacter(Human.RootPart.Position) < (Size + 5) then
-            table.insert(Hits, {
-                [1] = v,
-                [2] = v:FindFirstChild("HumanoidRootPart") or v:FindFirstChildOfClass("BasePart")
-            })
+        if Human and Human.RootPart and Human.Health > 0 and client:DistanceFromCharacter(Human.RootPart.Position) < Size+55 then
+            table.insert(Hits,Human.RootPart)
         end
     end
-    return Hits
-end
-
-function Module.GetAllPlayerHits(Size)
-    local Hits = {}
-    local Characters = characterfolder:GetChildren()
-    for i = 1, #Characters do
-        local v = Characters[i]
+    for i=1,#Characters do local v = Characters[i]
         if v ~= client.Character then
             local Human = v:FindFirstChildOfClass("Humanoid")
-            if Human and Human.RootPart and Human.Health > 0 and client:DistanceFromCharacter(Human.RootPart.Position) < (Size + 5) then
-                table.insert(Hits, {
-                    [1] = v,
-                    [2] = v:FindFirstChild("HumanoidRootPart") or v:FindFirstChildOfClass("BasePart")
-                })
+            if Human and Human.RootPart and Human.Health > 0 and client:DistanceFromCharacter(Human.RootPart.Position) < Size+55 then
+                table.insert(Hits,Human.RootPart)
             end
         end
     end
     return Hits
 end
 
-function Module.AttackFunction()
-    if not Module.IsAlive(client.Character) then return end
-    if not client.Character:FindFirstChildOfClass("Tool") then return end
-    local targets = Module.GetAllHits(Settings.HitboxSize)
-    if #targets > 0 then
-        regAtk:FireServer(.0)
-        local primaryTarget = targets[1][2]
-        local restTargets = {}
-        for i = 2, #targets do
-            table.insert(restTargets, targets[i])
-        end
-        local args = {
-            [1] = primaryTarget,
-            [2] = restTargets
-        }
-        regHit:FireServer(unpack(args))
+function getCurrentWeapon()
+    local char = client.Character
+    if not char then return nil end
+    
+    local tool = char:FindFirstChildOfClass("Tool")
+    if not tool then return nil end
+    
+    while tool.Parent ~= char do
+        tool = tool.Parent
     end
-    local playerTargets = Module.GetAllPlayerHits(Settings.HitboxSize)
-    if #playerTargets > 0 then
-        local primaryTarget = playerTargets[1][2]
-        local restTargets = {}
-        for i = 2, #playerTargets do
-            table.insert(restTargets, playerTargets[i])
-        end
-        local args = {
-            [1] = primaryTarget,
-            [2] = restTargets
-        }
-        regHit:FireServer(unpack(args))
-    end
+    
+    return tool
 end
 
 Module.FastAttack = (function()
-    if environment._trash_attack then
-        return environment._trash_attack
-    end
-    
-    local module = {
-        NextAttack = (-math.huge^math.huge*math.huge),
-        Distance = Settings.HitboxSize,
+    if not _G['Fast Attack'] then return end
+    if env._trash_attack then return env._trash_attack end
+
+    local AttackModule = {
+        NextAttack = 0,
+        Distance = 120,
         attackMobs = true,
-        attackPlayers = false,
+        attackPlayers = true,
         FirstAttack = false
     }
+
+    local RegisterAttack = net:WaitForChild("RE/RegisterAttack")
+    local RegisterHit = net:WaitForChild("RE/RegisterHit")
     
+    function AttackModule:BoostWeapon()
+        spawn(function()
+            local weapon = getCurrentWeapon()
+            if weapon then
+                rs.RigControllerEvent:FireServer("weaponChange", tostring(weapon))
+            end
+        end)
+    end
+    
+    function AttackModule:UnboostWeapon()
+        spawn(function()
+            local weapon = getCurrentWeapon()
+            if weapon then
+                rs.RigControllerEvent:FireServer("unequipWeapon", tostring(weapon))
+            end
+        end)
+    end
+
     function module:AttackEnemy(EnemyHead, Table)
         if EnemyHead and client:DistanceFromCharacter(EnemyHead.Position) < self.Distance then
             if not self.FirstAttack then
-                regAtk:FireServer(.0)
+                RegisterAttack:FireServer(.0)
                 self.FirstAttack = true
             end
-            regHit:FireServer(EnemyHead, Table or {})
+            RegisterHit:FireServer(EnemyHead, Table or {})
         end
     end
-    
-    function module:AttackNearest()
-        local args = {
-            [1] = nil,
-            [2] = {}
-        }
-        for _, Enemy in enemyfolder:GetChildren() do
-            local HRP = Enemy:FindFirstChild("HumanoidRootPart", true)
-            if HRP and client:DistanceFromCharacter(HRP.Position) < self.Distance then
-                if not args[1] then
-                    args[1] = Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart") or Enemy:FindFirstChildOfClass("BasePart")
-                else
-                    table.insert(args[2], {
-                        [1] = Enemy,
-                        [2] = Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart") or Enemy:FindFirstChildOfClass("BasePart")
-                    })
-                end
+
+    function AttackModule:AttackNearest()
+        local hits = getHits(self.Distance)
+        if #hits > 0 then
+            local args = {hits[1], {}}
+            for i = 2, #hits do
+                table.insert(args[2], {hits[i].Parent, hits[i]})
             end
-        end
-        self:AttackEnemy(unpack(args))
-        for _, Enemy in characterfolder:GetChildren() do
-            if Enemy ~= client.Character then
-                self:AttackEnemy(Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart"))
-            end
+            self:AttackEnemy(unpack(args))
         end
         if not self.FirstAttack then
-            task.wait(.0)
+            task.wait(0.01)
         end
     end
-    
-    function module:BladeHits()
+
+    function AttackModule:BladeHits()
         self:AttackNearest()
         self.FirstAttack = false
     end
-    environment._trash_attack = module
-    return module
-end)()
-
-local function DisableStun()
-    if client.Character then
-        local stun = client.Character:FindFirstChild("Stun")
-        local humanoid = client.Character:FindFirstChildOfClass("Humanoid")
-        local busy = client.Character:FindFirstChild("Busy")
-        if stun then stun.Value = 0 end
-        if humanoid then humanoid.Sit = false end
-        if busy then busy.Value = false end
-    end
-end
-
-spawn(function()
-    while task.wait(0.1) do
-        if _G['Fast Attack'] then
-            pcall(function()
-                Module.AttackFunction()
-                DisableStun()
-            end)
-        end
-    end
-end)
-
-spawn(function()
-    while task.wait(0.2) do
-        if _G['Fast Attack'] then
-            pcall(function()
-                Module.FastAttack:BladeHits()
-                DisableStun()
-            end)
-        end
-    end
-end)
-
-spawn(function()
-    while game:GetService("RunService").Stepped:Wait() do
-        if _G['Fast Attack'] and Module.IsAlive(client.Character) and client.Character:FindFirstChildOfClass("Tool") then
-            pcall(function()
-                Module.FastAttack:BladeHits()
-                DisableStun()
-            end)
-        end
-    end
-end)
-
-spawn(function()
-    while true do task.wait()
-        if _G['Fast Attack'] then
-            for i, v in next, workspace.Enemies:GetChildren() do
-                if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and 
-                (v.HumanoidRootPart.Position - client.Character.HumanoidRootPart.Position).Magnitude <= Settings.HitboxSize then
-                    regAtk:FireServer(0)
-                    local args = {
-                        [1] = v:FindFirstChild("RightHand") or v:FindFirstChild("UpperTorso") or v:FindFirstChild("HumanoidRootPart"),
-                        [2] = {}
-                    }
-                    for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
-                        if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
-                            table.insert(args[2], {
-                                [1] = e,
-                                [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
-                            })
-                        end
-                    end
-                    regHit:FireServer(unpack(args))
-                end
+    
+    local cdnormal = tick()
+    task.spawn(function()
+        while task.wait(Settings.ClickDelay or 0) do
+            if not _G['Fast Attack'] then continue end
+            if (tick() - Module.AttackCooldown) < 0 then continue end
+            if not Module.IsAlive(client.Character) then continue end
+            if not client.Character:FindFirstChildOfClass("Tool") then continue end
+            if tick() - cdnormal > 0.1 then
+                AttackModule:BladeHits()
+                cdnormal = tick()
             end
         end
-    end
-end)
+    end)
+    
+    task.spawn(function()
+        while task.wait() do
+            if not _G['Fast Attack'] then continue end
+            pcall(function()
+                for _, v in pairs(enemyFolder:GetChildren()) do
+                    if Module.IsAlive(v) then
+                        local hum = v:FindFirstChildOfClass("Humanoid")
+                        if hum and hum.RootPart and client:DistanceFromCharacter(hum.RootPart.Position) <= self.Distance then
+                            if tick() % 2 < 1 then
+                                self:BoostWeapon()
+                            else
+                                self:UnboostWeapon()
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    task.spawn(function()
+        local Animation = Instance.new("Animation")
+        while _G['Fast Attack'] do
+            task.wait()
+            pcall(function()
+                for _, v in pairs(enemyFolder:GetChildren()) do
+                    if Module.IsAlive(v) then
+                        local hum = v:FindFirstChildOfClass("Humanoid")
+                        if hum and hum.RootPart and client:DistanceFromCharacter(hum.RootPart.Position) <= self.Distance then
+                            local char = client.Character
+                            local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+                            if humanoid then
+                                for _, anim in pairs(humanoid:GetPlayingAnimationTracks()) do
+                                    if anim.Animation.AnimationId:find("basic") then
+                                        anim:AdjustSpeed(20)
+                                        anim:AdjustWeight(10)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    env._trash_attack = AttackModule
+    return AttackModule
+end)()
 
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
