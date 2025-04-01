@@ -9,6 +9,9 @@ local environment, replicatedstorage, players, net, client, modulepath, characte
     enemyfolder = workspace:WaitForChild("Enemies") 
 end
 
+local Player = game:GetService("Players").LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local VirtualUser = game:GetService("VirtualUser")
 local RS = game:GetService("ReplicatedStorage")
 local regAtk = RS.Modules.Net:FindFirstChild("RE/RegisterAttack")
 local regHit = RS.Modules.Net:FindFirstChild("RE/RegisterHit")
@@ -273,6 +276,1131 @@ for i, v in next, workspace.Enemies:GetChildren() do
         end
     end
 end
+
+local Module = {}
+Module.AttackCooldown = .0
+local CachedChars = {}
+
+function Module.IsAlive(Char)
+    if not Char then
+        return nil
+    end
+    if CachedChars[Char] then
+        return CachedChars[Char].Health > 0
+    end
+    local Hum = Char:FindFirstChildOfClass("Humanoid")
+    CachedChars[Char] = Hum
+    return Hum and Hum.Health > 0
+end
+
+local Settings = {
+    ClickDelay = .0,
+    AutoClick = true,
+    HitboxMagnitude = 60
+}
+
+Module.FastAttack = (function()
+    if environment._trash_attack then
+        return environment._trash_attack
+    end
+    
+    local module = {
+        NextAttack = (-math.huge^math.huge*math.huge),
+        Distance = 60,
+        attackMobs = true,
+        attackPlayers = false
+    }
+    
+    function module:GetBladeHits()
+        local hitsList = {}
+        local hash = {}
+        for _, enemy in pairs(enemyfolder:GetChildren()) do
+            if enemy:FindFirstChild("HumanoidRootPart") and 
+               client:DistanceFromCharacter(enemy.HumanoidRootPart.Position) <= self.Distance and
+               enemy:FindFirstChild("Humanoid") and 
+               enemy.Humanoid.Health > 0 then
+                local part = enemy:FindFirstChild("HumanoidRootPart") or enemy:FindFirstChildOfClass("BasePart")
+                if part and not hash[enemy] then
+                    table.insert(hitsList, {
+                        [1] = enemy,
+                        [2] = part
+                    })
+                    hash[enemy] = true
+                end
+            end
+        end
+        if self.attackPlayers then
+            for _, char in pairs(characterfolder:GetChildren()) do
+                if char ~= client.Character and
+                   char:FindFirstChild("HumanoidRootPart") and
+                   client:DistanceFromCharacter(char.HumanoidRootPart.Position) <= self.Distance and
+                   char:FindFirstChild("Humanoid") and 
+                   char.Humanoid.Health > 0 then
+                    local part = char:FindFirstChild("HumanoidRootPart") or char:FindFirstChildOfClass("BasePart")
+                    if part and not hash[char] then
+                        table.insert(hitsList, {
+                            [1] = char,
+                            [2] = part
+                        })
+                        hash[char] = true
+                    end
+                end
+            end
+        end
+        
+        return hitsList
+    end
+    
+    function module:AttackEnemy(targetPart, hitsList)
+        if targetPart and client:DistanceFromCharacter(targetPart.Position) < self.Distance then
+            RegisterAttack:FireServer(.0)
+            RegisterHit:FireServer(targetPart, hitsList or {})
+        end
+    end
+    
+    function module:AttackNearest()
+        local hitsList = self:GetBladeHits()
+        if #hitsList > 0 then
+            local firstTarget = hitsList[1][2]
+            table.remove(hitsList, 1)
+            self:AttackEnemy(firstTarget, hitsList)
+        end
+    end
+    
+    function module:BladeHits()
+        self:AttackNearest()
+    end
+    
+    task.spawn(function()
+        while game:GetService("RunService").Stepped:Wait() do
+            if not _G['Super Fast Attack'] then continue end
+            if (tick() - Module.AttackCooldown) < 0 then continue end
+            if not Settings.AutoClick then continue end
+            if not Module.IsAlive(client.Character) then continue end
+            if not client.Character:FindFirstChildOfClass("Tool") then continue end
+            module:BladeHits()
+        end
+    end)
+    environment._trash_attack = module
+    return module
+end)()
+
+local time = tick()
+local function PlayerClick()
+    local plrPP = Player.Character and Player.Character.PrimaryPart
+    if plrPP and TeleportPos and (plrPP.Position - TeleportPos).Magnitude > 25 then return end
+    if _G['Super Fast Attack'] and (tick() - time) >= .0 then
+        task.spawn(function()
+            VirtualUser:CaptureController()
+            VirtualUser:Button1Down(Vector2.new(math.huge, math.huge))
+        end)
+        time = tick()
+    end
+end
+
+spawn(function()
+    while true do task.wait()
+        if _G['Super Fast Attack'] then
+            pcall(function()
+                for _, enemy in pairs(workspace.Enemies:GetChildren()) do
+                    if enemy.Humanoid and enemy.Humanoid.Health > 0 and 
+                       enemy:FindFirstChild("HumanoidRootPart") and 
+                       (enemy.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude <= 60 then
+                        RegisterAttack:FireServer(0)
+                        local args = {
+                            [1] = enemy:FindFirstChild("RightHand") or enemy:FindFirstChild("HumanoidRootPart"),
+                            [2] = {}
+                        }
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        RegisterHit:FireServer(unpack(args))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local Module = {}
+Module.AttackCooldown = tick()
+local CachedChars = {}
+
+function Module.IsAlive(Char)
+    if not Char then
+        return nil
+    end
+    if CachedChars[Char] then
+        return CachedChars[Char].Health > 0
+    end
+    local Hum = Char:FindFirstChildOfClass("Humanoid")
+    CachedChars[Char] = Hum
+    return Hum and Hum.Health > 0
+end
+
+local Settings = {
+    ClickDelay = tick(),
+    AutoClick = true,
+    HitboxMagnitude = 60
+}
+
+Module.FastAttack = (function()
+    if environment._trash_attack then
+        return environment._trash_attack
+    end
+    
+    local module = {
+        NextAttack = (-math.huge^math.huge*math.huge),
+        Distance = 60,
+        attackMobs = true,
+        attackPlayers = false
+    }
+    
+    function module:GetBladeHits()
+        local hitsList = {}
+        local hash = {}
+        for _, enemy in pairs(enemyfolder:GetChildren()) do
+            if enemy:FindFirstChild("HumanoidRootPart") and 
+               client:DistanceFromCharacter(enemy.HumanoidRootPart.Position) <= self.Distance and
+               enemy:FindFirstChild("Humanoid") and 
+               enemy.Humanoid.Health > 0 then
+                local part = enemy:FindFirstChild("HumanoidRootPart") or enemy:FindFirstChildOfClass("BasePart")
+                if part and not hash[enemy] then
+                    table.insert(hitsList, {
+                        [1] = enemy,
+                        [2] = part
+                    })
+                    hash[enemy] = true
+                end
+            end
+        end
+        if self.attackPlayers then
+            for _, char in pairs(characterfolder:GetChildren()) do
+                if char ~= client.Character and
+                   char:FindFirstChild("HumanoidRootPart") and
+                   client:DistanceFromCharacter(char.HumanoidRootPart.Position) <= self.Distance and
+                   char:FindFirstChild("Humanoid") and 
+                   char.Humanoid.Health > 0 then
+                    local part = char:FindFirstChild("HumanoidRootPart") or char:FindFirstChildOfClass("BasePart")
+                    if part and not hash[char] then
+                        table.insert(hitsList, {
+                            [1] = char,
+                            [2] = part
+                        })
+                        hash[char] = true
+                    end
+                end
+            end
+        end
+        return hitsList
+    end
+    
+    function module:AttackEnemy(targetPart, hitsList)
+        if targetPart and client:DistanceFromCharacter(targetPart.Position) < self.Distance then
+            RegisterAttack:FireServer(.0)
+            RegisterHit:FireServer(targetPart, hitsList or {})
+        end
+    end
+    
+    function module:AttackNearest()
+        local hitsList = self:GetBladeHits()
+        if #hitsList > 0 then
+            local firstTarget = hitsList[1][2]
+            table.remove(hitsList, 1)
+            self:AttackEnemy(firstTarget, hitsList)
+        end
+    end
+    
+    function module:BladeHits()
+        self:AttackNearest()
+    end
+    
+    task.spawn(function()
+        while game:GetService("RunService").Stepped:Wait() do
+            if not _G['Super Fast Attack'] then continue end
+            if (tick() - Module.AttackCooldown) < 0.000000001 then continue end
+            if not Settings.AutoClick then continue end
+            if not Module.IsAlive(client.Character) then continue end
+            if not client.Character:FindFirstChildOfClass("Tool") then continue end
+            module:BladeHits()
+        end
+    end)
+    environment._trash_attack = module
+    return module
+end)()
+
+local time = tick()
+local function PlayerClick()
+    local plrPP = Player.Character and Player.Character.PrimaryPart
+    if plrPP and TeleportPos and (plrPP.Position - TeleportPos).Magnitude > 25 then return end
+    if _G['Super Fast Attack'] and (tick() - time) >= 0.00000000007 then
+        task.spawn(function()
+            VirtualUser:CaptureController()
+            VirtualUser:Button1Down(Vector2.new(math.huge, math.huge))
+        end)
+        time = tick()
+    end
+end
+
+spawn(function()
+    while true do task.wait()
+        if _G['Super Fast Attack'] then
+            pcall(function()
+                for _, enemy in pairs(workspace.Enemies:GetChildren()) do
+                    if enemy.Humanoid and enemy.Humanoid.Health > 0 and 
+                       enemy:FindFirstChild("HumanoidRootPart") and 
+                       (enemy.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude <= 60 then
+                        RegisterAttack:FireServer(0)
+                        local args = {
+                            [1] = enemy:FindFirstChild("RightHand") or enemy:FindFirstChild("HumanoidRootPart"),
+                            [2] = {}
+                        }
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        RegisterHit:FireServer(unpack(args))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local Module = {}
+Module.AttackCooldown = 0.0000000000001
+local CachedChars = {}
+
+function Module.IsAlive(Char)
+    if not Char then
+        return nil
+    end
+    if CachedChars[Char] then
+        return CachedChars[Char].Health > 0
+    end
+    local Hum = Char:FindFirstChildOfClass("Humanoid")
+    CachedChars[Char] = Hum
+    return Hum and Hum.Health > 0
+end
+
+local Settings = {
+    ClickDelay = 0.0000000000001,
+    AutoClick = true,
+    HitboxMagnitude = 60
+}
+
+Module.FastAttack = (function()
+    if environment._trash_attack then
+        return environment._trash_attack
+    end
+    
+    local module = {
+        NextAttack = (-math.huge^math.huge*math.huge),
+        Distance = 60,
+        attackMobs = true,
+        attackPlayers = false
+    }
+    
+    function module:GetBladeHits()
+        local hitsList = {}
+        local hash = {}
+        for _, enemy in pairs(enemyfolder:GetChildren()) do
+            if enemy:FindFirstChild("HumanoidRootPart") and 
+               client:DistanceFromCharacter(enemy.HumanoidRootPart.Position) <= self.Distance and
+               enemy:FindFirstChild("Humanoid") and 
+               enemy.Humanoid.Health > 0 then
+                local part = enemy:FindFirstChild("HumanoidRootPart") or enemy:FindFirstChildOfClass("BasePart")
+                if part and not hash[enemy] then
+                    table.insert(hitsList, {
+                        [1] = enemy,
+                        [2] = part
+                    })
+                    hash[enemy] = true
+                end
+            end
+        end
+        if self.attackPlayers then
+            for _, char in pairs(characterfolder:GetChildren()) do
+                if char ~= client.Character and
+                   char:FindFirstChild("HumanoidRootPart") and
+                   client:DistanceFromCharacter(char.HumanoidRootPart.Position) <= self.Distance and
+                   char:FindFirstChild("Humanoid") and 
+                   char.Humanoid.Health > 0 then
+                    local part = char:FindFirstChild("HumanoidRootPart") or char:FindFirstChildOfClass("BasePart")
+                    if part and not hash[char] then
+                        table.insert(hitsList, {
+                            [1] = char,
+                            [2] = part
+                        })
+                        hash[char] = true
+                    end
+                end
+            end
+        end
+        return hitsList
+    end
+    
+    function module:AttackEnemy(targetPart, hitsList)
+        if targetPart and client:DistanceFromCharacter(targetPart.Position) < self.Distance then
+            RegisterAttack:FireServer(0.0000000000001)
+            RegisterHit:FireServer(targetPart, hitsList or {})
+        end
+    end
+    
+    function module:AttackNearest()
+        local hitsList = self:GetBladeHits()
+        if #hitsList > 0 then
+            local firstTarget = hitsList[1][2]
+            table.remove(hitsList, 1)
+            self:AttackEnemy(firstTarget, hitsList)
+        end
+    end
+    
+    function module:BladeHits()
+        self:AttackNearest()
+    end
+    
+    task.spawn(function()
+        while game:GetService("RunService").Stepped:Wait() do
+            if not _G['Super Fast Attack'] then continue end
+            if (tick() - Module.AttackCooldown) < 0.0000000000001 then continue end
+            if not Settings.AutoClick then continue end
+            if not Module.IsAlive(client.Character) then continue end
+            if not client.Character:FindFirstChildOfClass("Tool") then continue end
+            module:BladeHits()
+        end
+    end)
+    environment._trash_attack = module
+    return module
+end)()
+
+local time = tick()
+local function PlayerClick()
+    local plrPP = Player.Character and Player.Character.PrimaryPart
+    if plrPP and TeleportPos and (plrPP.Position - TeleportPos).Magnitude > 25 then return end
+    if _G['Super Fast Attack'] and (tick() - time) >= 0.0000000000001 then
+        task.spawn(function()
+            VirtualUser:CaptureController()
+            VirtualUser:Button1Down(Vector2.new(math.huge, math.huge))
+        end)
+        time = tick()
+    end
+end
+
+spawn(function()
+    while true do task.wait()
+        if _G['Super Fast Attack'] then
+            pcall(function()
+                for _, enemy in pairs(workspace.Enemies:GetChildren()) do
+                    if enemy.Humanoid and enemy.Humanoid.Health > 0 and 
+                       enemy:FindFirstChild("HumanoidRootPart") and 
+                       (enemy.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude <= 60 then
+                        RegisterAttack:FireServer(0.0000000000001)
+                        local args = {
+                            [1] = enemy:FindFirstChild("RightHand") or enemy:FindFirstChild("HumanoidRootPart"),
+                            [2] = {}
+                        }
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        RegisterHit:FireServer(unpack(args))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local Module = {}
+Module.AttackCooldown = 0.0000000000000007
+local CachedChars = {}
+
+function Module.IsAlive(Char)
+    if not Char then
+        return nil
+    end
+    if CachedChars[Char] then
+        return CachedChars[Char].Health > 0
+    end
+    local Hum = Char:FindFirstChildOfClass("Humanoid")
+    CachedChars[Char] = Hum
+    return Hum and Hum.Health > 0
+end
+
+local Settings = {
+    ClickDelay = 0.0000000000000007,
+    AutoClick = true,
+    HitboxMagnitude = 60
+}
+
+Module.FastAttack = (function()
+    if environment._trash_attack then
+        return environment._trash_attack
+    end
+    
+    local module = {
+        NextAttack = (-math.huge^math.huge*math.huge),
+        Distance = 60,
+        attackMobs = true,
+        attackPlayers = false
+    }
+    
+    function module:GetBladeHits()
+        local hitsList = {}
+        local hash = {}
+        for _, enemy in pairs(enemyfolder:GetChildren()) do
+            if enemy:FindFirstChild("HumanoidRootPart") and 
+               client:DistanceFromCharacter(enemy.HumanoidRootPart.Position) <= self.Distance and
+               enemy:FindFirstChild("Humanoid") and 
+               enemy.Humanoid.Health > 0 then
+                local part = enemy:FindFirstChild("HumanoidRootPart") or enemy:FindFirstChildOfClass("BasePart")
+                if part and not hash[enemy] then
+                    table.insert(hitsList, {
+                        [1] = enemy,
+                        [2] = part
+                    })
+                    hash[enemy] = true
+                end
+            end
+        end
+        if self.attackPlayers then
+            for _, char in pairs(characterfolder:GetChildren()) do
+                if char ~= client.Character and
+                   char:FindFirstChild("HumanoidRootPart") and
+                   client:DistanceFromCharacter(char.HumanoidRootPart.Position) <= self.Distance and
+                   char:FindFirstChild("Humanoid") and 
+                   char.Humanoid.Health > 0 then
+                    local part = char:FindFirstChild("HumanoidRootPart") or char:FindFirstChildOfClass("BasePart")
+                    if part and not hash[char] then
+                        table.insert(hitsList, {
+                            [1] = char,
+                            [2] = part
+                        })
+                        hash[char] = true
+                    end
+                end
+            end
+        end
+        return hitsList
+    end
+    
+    function module:AttackEnemy(targetPart, hitsList)
+        if targetPart and client:DistanceFromCharacter(targetPart.Position) < self.Distance then
+            RegisterAttack:FireServer(0.0000000000000007)
+            RegisterHit:FireServer(targetPart, hitsList or {})
+        end
+    end
+    
+    function module:AttackNearest()
+        local hitsList = self:GetBladeHits()
+        if #hitsList > 0 then
+            local firstTarget = hitsList[1][2]
+            table.remove(hitsList, 1)
+            self:AttackEnemy(firstTarget, hitsList)
+        end
+    end
+    
+    function module:BladeHits()
+        self:AttackNearest()
+    end
+    
+    task.spawn(function()
+        while game:GetService("RunService").Stepped:Wait() do
+            if not _G['Super Fast Attack'] then continue end
+            if (tick() - Module.AttackCooldown) < 0.0000000000000007 then continue end
+            if not Settings.AutoClick then continue end
+            if not Module.IsAlive(client.Character) then continue end
+            if not client.Character:FindFirstChildOfClass("Tool") then continue end
+            module:BladeHits()
+        end
+    end)
+    environment._trash_attack = module
+    return module
+end)()
+
+local time = tick()
+local function PlayerClick()
+    local plrPP = Player.Character and Player.Character.PrimaryPart
+    if plrPP and TeleportPos and (plrPP.Position - TeleportPos).Magnitude > 25 then return end
+    if _G['Super Fast Attack'] and (tick() - time) >= 0.0000000000000007 then
+        task.spawn(function()
+            VirtualUser:CaptureController()
+            VirtualUser:Button1Down(Vector2.new(math.huge, math.huge))
+        end)
+        time = tick()
+    end
+end
+
+spawn(function()
+    while true do task.wait()
+        if _G['Super Fast Attack'] then
+            pcall(function()
+                for _, enemy in pairs(workspace.Enemies:GetChildren()) do
+                    if enemy.Humanoid and enemy.Humanoid.Health > 0 and 
+                       enemy:FindFirstChild("HumanoidRootPart") and 
+                       (enemy.HumanoidRootPart.Position - Player.Character.HumanoidRootPart.Position).Magnitude <= 60 then
+                        RegisterAttack:FireServer(0.0000000000000007)
+                        local args = {
+                            [1] = enemy:FindFirstChild("RightHand") or enemy:FindFirstChild("HumanoidRootPart"),
+                            [2] = {}
+                        }
+                        for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                            if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                table.insert(args[2], {
+                                    [1] = e,
+                                    [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                })
+                            end
+                        end
+                        RegisterHit:FireServer(unpack(args))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local RunService = game:GetService("RunService")
+local CollectionService = game:GetService("CollectionService")
+
+local Module = {}
+Module.AttackCooldown = .0
+local CachedChars = {}
+local CurrentAllMob = {}
+local canHits = {}
+local nearbymon = false
+
+function Module.IsAlive(Char: Model?): boolean
+	if not Char then
+		return nil
+	end
+	if CachedChars[Char] then
+		return CachedChars[Char].Health > 0
+	end
+	local Hum = Char:FindFirstChildOfClass("Humanoid")
+	CachedChars[Char] = Hum
+	return Hum and Hum.Health > 0
+end
+
+local function dist(Position)
+    local Character = client.Character
+    if Character and Character:FindFirstChild("HumanoidRootPart") then
+        return (Character.HumanoidRootPart.Position - Position).Magnitude
+    end
+    return math.huge
+end
+
+local Settings = {
+    ClickDelay = .0,
+    AutoClick = true,
+    NoAttackAnimation = false
+}
+
+local Priority = {
+    Recently = nil,
+    Class = "Combat",
+    clear = function(self)
+        self.Recently = nil
+    end
+}
+
+local AttackSignal = Instance.new("BindableEvent")
+Module.FastAttack = (function()
+    if environment._trash_attack then
+        return environment._trash_attack
+    end
+    local module = {
+        NextAttack = (-math.huge^math.huge*math.huge),
+        Distance = 65,
+        attackMobs = true,
+        attackPlayers = true,
+        FirstAttack = false
+    }
+    local RegisterAttack = net:WaitForChild("RE/RegisterAttack")
+    local RegisterHit = net:WaitForChild("RE/RegisterHit")
+    
+    function module:AttackEnemy(EnemyHead, Table)
+        if EnemyHead and client:DistanceFromCharacter(EnemyHead.Position) < self.Distance then
+            if not self.FirstAttack then
+                RegisterAttack:FireServer(.0)
+                self.FirstAttack = true
+            end
+            RegisterHit:FireServer(EnemyHead, Table or {})
+            AttackSignal:Fire()
+        end
+    end
+    
+    function module:AttackNearest()
+        local args = {
+            [1] = nil,
+            [2] = {}
+        }
+        for _, Enemy in enemyfolder:GetChildren() do
+            local HRP = Enemy:FindFirstChild("HumanoidRootPart", true)
+            if HRP and client:DistanceFromCharacter(HRP.Position) < self.Distance then
+                if not args[1] then
+                    args[1] = Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart") or Enemy:FindFirstChildOfClass("BasePart")
+                else
+                    table.insert(args[2], {
+                        [1] = Enemy,
+                        [2] = Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart") or Enemy:FindFirstChildOfClass("BasePart")
+                    })
+                end
+            end
+        end
+        self:AttackEnemy(unpack(args))
+        if self.attackPlayers then
+            for _, Enemy in characterfolder:GetChildren() do
+                if Enemy ~= client.Character then
+                    self:AttackEnemy(Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart"))
+                end
+            end
+        end
+        if not self.FirstAttack then
+            task.wait(.0)
+        end
+    end
+    
+    function module:BladeHits()
+        self:AttackNearest()
+        self.FirstAttack = false
+    end
+    
+    task.spawn(function()
+        while RunService.Stepped:Wait() do
+            if (tick() - Module.AttackCooldown) < 0 then continue end
+            if not Settings.AutoClick then continue end
+            if not Module.IsAlive(client.Character) then continue end
+            if not client.Character:FindFirstChildOfClass("Tool") then continue end
+            module:BladeHits()
+        end
+    end)
+    
+    task.spawn(function()
+        local stacking = tick()
+        local printCooldown = tick()
+        local OldPriority = Priority.Recently
+        while wait(.075) do
+            nearbymon = false
+            table.clear(CurrentAllMob)
+            table.clear(canHits)
+            local mobs = CollectionService:GetTagged("ActiveRig")
+            for i=1, #mobs do 
+                local v = mobs[i]
+                local Human = v:FindFirstChildOfClass("Humanoid")
+                if Human and Human.Health > 0 and Human.RootPart and v ~= client.Character then
+                    local IsPlayer = players:GetPlayerFromCharacter(v)
+                    local IsAlly = IsPlayer and CollectionService:HasTag(IsPlayer, "Ally"..client.Name)
+                    if not IsAlly then
+                        CurrentAllMob[#CurrentAllMob + 1] = v
+                        if not nearbymon and dist(Human.RootPart.Position) < 65 then
+                            nearbymon = true
+                        end
+                    end
+                end
+            end
+            if nearbymon then
+                local Enemies = enemyfolder:GetChildren()
+                local Players = players:GetPlayers()
+                for i=1, #Enemies do 
+                    local v = Enemies[i]
+                    local Human = v:FindFirstChildOfClass("Humanoid")
+                    if Human and Human.RootPart and Human.Health > 0 and dist(Human.RootPart.Position) < 65 then
+                        canHits[#canHits+1] = Human.RootPart
+                    end
+                end
+                for i=1, #Players do 
+                    local v = Players[i].Character
+                    if v and module.attackPlayers and Players[i] ~= client and not Players[i]:GetAttribute("PvpDisabled") then
+                        local Human = v:FindFirstChildOfClass("Humanoid")
+                        if Human and Human.RootPart and Human.Health > 0 and dist(Human.RootPart.Position) < 65 then
+                            canHits[#canHits+1] = Human.RootPart
+                        end
+                    end
+                end
+            end
+            if OldPriority ~= Priority.Recently then
+                OldPriority = Priority.Recently
+                stacking = tick()
+            end
+            if tick() - stacking > 60 and OldPriority and OldPriority.Class == Priority.Class then
+                Priority:clear()
+            elseif tick() - printCooldown > 5 then
+                printCooldown = tick()
+            end
+        end
+    end)
+    
+    task.spawn(function()
+        while true do task.wait(0)
+            pcall(function()
+                if _G['Super Fast Attack'] then
+                    for i, v in next, workspace.Enemies:GetChildren() do
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and 
+                        (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                            RegisterAttack:FireServer(0)
+                            local args = {
+                                [1] = v:FindFirstChild("RightHand") or v:FindFirstChild("UpperTorso") or v:FindFirstChild("HumanoidRootPart"),
+                                [2] = {}
+                            }
+                            for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                                if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                    table.insert(args[2], {
+                                        [1] = e,
+                                        [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                    })
+                                end
+                            end
+                            RegisterHit:FireServer(unpack(args))
+                            AttackSignal:Fire()
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    environment._trash_attack = module
+    return module
+end)()
+
+local Xz12 = false
+task.spawn(function()
+    local function zXy9(player)
+        local lst = {}
+        for _, obj in pairs(workspace.Characters:GetChildren()) do
+            if obj ~= player.Character and obj:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj.HumanoidRootPart.Position) < 200 then
+                table.insert(lst, {obj, obj.HumanoidRootPart})
+            end
+        end
+        for _, obj2 in pairs(workspace.Enemies:GetChildren()) do
+            if obj2:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj2.HumanoidRootPart.Position) < 200 then
+                table.insert(lst, {obj2, obj2.HumanoidRootPart})
+            end
+        end
+        return lst
+    end
+    local yZn34 = false
+    while true do
+        if Xz12 then
+            yZn34 = true
+            wait(.0)
+        else
+            yZn34 = false
+            wait(.0)
+        end
+        if Xz12 then
+            local cLst = zXy9(client)
+            if #cLst > 0 then
+                net:WaitForChild("RE/RegisterAttack"):FireServer(.0)
+                for _, tgt in next, cLst do
+                    net:WaitForChild("RE/RegisterHit"):FireServer(cLst[_][2], cLst)
+                end
+            end
+        end
+    end
+end)
+
+Xz12 = true
+task.spawn(function()
+    while true do task.wait(0)
+        for i, v in next, workspace.Enemies:GetChildren() do
+            if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - client.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                net:WaitForChild("RE/RegisterAttack"):FireServer(0)
+                local args = {
+                    [1] = v:FindFirstChild("RightHand") or v:FindFirstChild("UpperTorso") or v:FindFirstChild("HumanoidRootPart") or v:FindFirstChildOfClass("BasePart"),
+                    [2] = {}
+                }
+                for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                    if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                        table.insert(args[2], {
+                            [1] = e,
+                            [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                        })
+                    end
+                end
+                net:WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+            end
+        end
+    end
+end)
+
+local RunService = game:GetService("RunService")
+local CollectionService = game:GetService("CollectionService")
+
+local Module = {}
+Module.AttackCooldown = tick()
+local CachedChars = {}
+local CurrentAllMob = {}
+local canHits = {}
+local nearbymon = false
+
+function Module.IsAlive(Char: Model?): boolean
+	if not Char then
+		return nil
+	end
+	if CachedChars[Char] then
+		return CachedChars[Char].Health > 0
+	end
+	local Hum = Char:FindFirstChildOfClass("Humanoid")
+	CachedChars[Char] = Hum
+	return Hum and Hum.Health > 0
+end
+
+local function dist(Position)
+    local Character = client.Character
+    if Character and Character:FindFirstChild("HumanoidRootPart") then
+        return (Character.HumanoidRootPart.Position - Position).Magnitude
+    end
+    return math.huge
+end
+
+local Settings = {
+    ClickDelay = 0.0000000001,
+    AutoClick = true,
+    NoAttackAnimation = false
+}
+
+local Priority = {
+    Recently = nil,
+    Class = "Combat",
+    clear = function(self)
+        self.Recently = nil
+    end
+}
+
+local AttackSignal = Instance.new("BindableEvent")
+Module.FastAttack = (function()
+    if environment._trash_attack then
+        return environment._trash_attack
+    end
+    local module = {
+        NextAttack = (-math.huge^math.huge*math.huge),
+        Distance = 65,
+        attackMobs = true,
+        attackPlayers = true,
+        FirstAttack = false
+    }
+    local RegisterAttack = net:WaitForChild("RE/RegisterAttack")
+    local RegisterHit = net:WaitForChild("RE/RegisterHit")
+    
+    function module:AttackEnemy(EnemyHead, Table)
+        if EnemyHead and client:DistanceFromCharacter(EnemyHead.Position) < self.Distance then
+            if not self.FirstAttack then
+                RegisterAttack:FireServer(0.0000000001)
+                self.FirstAttack = true
+            end
+            RegisterHit:FireServer(EnemyHead, Table or {})
+            AttackSignal:Fire()
+        end
+    end
+    
+    function module:AttackNearest()
+        local args = {
+            [1] = nil,
+            [2] = {}
+        }
+        for _, Enemy in enemyfolder:GetChildren() do
+            local HRP = Enemy:FindFirstChild("HumanoidRootPart", true)
+            if HRP and client:DistanceFromCharacter(HRP.Position) < self.Distance then
+                if not args[1] then
+                    args[1] = Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart") or Enemy:FindFirstChildOfClass("BasePart")
+                else
+                    table.insert(args[2], {
+                        [1] = Enemy,
+                        [2] = Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart") or Enemy:FindFirstChildOfClass("BasePart")
+                    })
+                end
+            end
+        end
+        self:AttackEnemy(unpack(args))
+        if self.attackPlayers then
+            for _, Enemy in characterfolder:GetChildren() do
+                if Enemy ~= client.Character then
+                    self:AttackEnemy(Enemy:FindFirstChild("UpperTorso") or Enemy:FindFirstChild("HumanoidRootPart"))
+                end
+            end
+        end
+        if not self.FirstAttack then
+            task.wait(0.0000000001)
+        end
+    end
+    
+    function module:BladeHits()
+        self:AttackNearest()
+        self.FirstAttack = false
+    end
+    
+    task.spawn(function()
+        while RunService.Stepped:Wait() do
+            if (tick() - Module.AttackCooldown) < 0.0000000001 then continue end
+            if not Settings.AutoClick then continue end
+            if not Module.IsAlive(client.Character) then continue end
+            if not client.Character:FindFirstChildOfClass("Tool") then continue end
+            module:BladeHits()
+        end
+    end)
+    
+    task.spawn(function()
+        local stacking = tick()
+        local printCooldown = tick()
+        local OldPriority = Priority.Recently
+        while task.wait(0.0000000001) do
+            nearbymon = false
+            table.clear(CurrentAllMob)
+            table.clear(canHits)
+            local mobs = CollectionService:GetTagged("ActiveRig")
+            for i=1, #mobs do 
+                local v = mobs[i]
+                local Human = v:FindFirstChildOfClass("Humanoid")
+                if Human and Human.Health > 0 and Human.RootPart and v ~= client.Character then
+                    local IsPlayer = players:GetPlayerFromCharacter(v)
+                    local IsAlly = IsPlayer and CollectionService:HasTag(IsPlayer, "Ally"..client.Name)
+                    if not IsAlly then
+                        CurrentAllMob[#CurrentAllMob + 1] = v
+                        if not nearbymon and dist(Human.RootPart.Position) < 65 then
+                            nearbymon = true
+                        end
+                    end
+                end
+            end
+            if nearbymon then
+                local Enemies = enemyfolder:GetChildren()
+                local Players = players:GetPlayers()
+                for i=1, #Enemies do 
+                    local v = Enemies[i]
+                    local Human = v:FindFirstChildOfClass("Humanoid")
+                    if Human and Human.RootPart and Human.Health > 0 and dist(Human.RootPart.Position) < 65 then
+                        canHits[#canHits+1] = Human.RootPart
+                    end
+                end
+                for i=1, #Players do 
+                    local v = Players[i].Character
+                    if v and module.attackPlayers and Players[i] ~= client and not Players[i]:GetAttribute("PvpDisabled") then
+                        local Human = v:FindFirstChildOfClass("Humanoid")
+                        if Human and Human.RootPart and Human.Health > 0 and dist(Human.RootPart.Position) < 65 then
+                            canHits[#canHits+1] = Human.RootPart
+                        end
+                    end
+                end
+            end
+            if OldPriority ~= Priority.Recently then
+                OldPriority = Priority.Recently
+                stacking = tick()
+            end
+            if tick() - stacking > 60 and OldPriority and OldPriority.Class == Priority.Class then
+                Priority:clear()
+            elseif tick() - printCooldown > 5 then
+                printCooldown = tick()
+            end
+        end
+    end)
+    
+    task.spawn(function()
+        while true do task.wait(0.0000000001)
+            pcall(function()
+                if _G['Super Fast Attack'] then
+                    for i, v in next, workspace.Enemies:GetChildren() do
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and 
+                        (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                            RegisterAttack:FireServer(0.0000000001)
+                            local args = {
+                                [1] = v:FindFirstChild("RightHand") or v:FindFirstChild("UpperTorso") or v:FindFirstChild("HumanoidRootPart"),
+                                [2] = {}
+                            }
+                            for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                                if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                                    table.insert(args[2], {
+                                        [1] = e,
+                                        [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                                    })
+                                end
+                            end
+                            RegisterHit:FireServer(unpack(args))
+                            AttackSignal:Fire()
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    environment._trash_attack = module
+    return module
+end)()
+
+local Xz12 = false
+task.spawn(function()
+    local function zXy9(player)
+        local lst = {}
+        for _, obj in pairs(workspace.Characters:GetChildren()) do
+            if obj ~= player.Character and obj:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj.HumanoidRootPart.Position) < 200 then
+                table.insert(lst, {obj, obj.HumanoidRootPart})
+            end
+        end
+        for _, obj2 in pairs(workspace.Enemies:GetChildren()) do
+            if obj2:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(obj2.HumanoidRootPart.Position) < 200 then
+                table.insert(lst, {obj2, obj2.HumanoidRootPart})
+            end
+        end
+        return lst
+    end
+    local yZn34 = false
+    while true do
+        if Xz12 then
+            yZn34 = true
+            task.wait(0.0000000001)
+        else
+            yZn34 = false
+            task.wait(0.0000000001)
+        end
+        if Xz12 then
+            local cLst = zXy9(client)
+            if #cLst > 0 then
+                net:WaitForChild("RE/RegisterAttack"):FireServer(0.0000000001)
+                for _, tgt in next, cLst do
+                    net:WaitForChild("RE/RegisterHit"):FireServer(cLst[_][2], cLst)
+                end
+            end
+        end
+    end
+end)
+
+Xz12 = true
+task.spawn(function()
+    while true do task.wait(0.0000000001)
+        for i, v in next, workspace.Enemies:GetChildren() do
+            if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - client.Character.HumanoidRootPart.Position).Magnitude <= tonumber(60) then
+                net:WaitForChild("RE/RegisterAttack"):FireServer(0.0000000001)
+                local args = {
+                    [1] = v:FindFirstChild("RightHand") or v:FindFirstChild("UpperTorso") or v:FindFirstChild("HumanoidRootPart") or v:FindFirstChildOfClass("BasePart"),
+                    [2] = {}
+                }
+                for _, e in next, workspace:WaitForChild("Enemies"):GetChildren() do
+                    if e:FindFirstChild("Humanoid") and e.Humanoid.Health > 0 then
+                        table.insert(args[2], {
+                            [1] = e,
+                            [2] = e:FindFirstChild("HumanoidRootPart") or e:FindFirstChildOfClass("BasePart")
+                        })
+                    end
+                end
+                net:WaitForChild("RE/RegisterHit"):FireServer(unpack(args))
+            end
+        end
+    end
+end)
 
 local Module = {
     AttackCooldown = 0.000000007
